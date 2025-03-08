@@ -1,37 +1,24 @@
-import { IFeed } from "./feed.interface";
+import mongoose, { Schema, Document, Types } from 'mongoose';
+import { IFeed } from './feed.interface';
 
-export class Feed implements IFeed {
-    id: string;
-    titulo: string;
-    descripcion: string;
-    url: string;
-    fuente: string;
-    fecha: Date;
-    categoria: "politica" | "deportes" | "tecnologia" | "economia" | "otros";
-    imagen?: string;
-    destacada: boolean;
-  
-    constructor(
-      id: string,
-      titulo: string,
-      descripcion: string,
-      url: string,
-      fuente: string,
-      fecha: Date,
-      categoria: "politica" | "deportes" | "tecnologia" | "economia" | "otros",
-      imagen: string | undefined,
-      destacada: boolean
-    ) {
-      this.id = id;
-      this.titulo = titulo;
-      this.descripcion = descripcion;
-      this.url = url;
-      this.fuente = fuente;
-      this.fecha = fecha;
-      this.categoria = categoria;
-      this.imagen = imagen;
-      this.destacada = destacada;
-    }
+export interface IFeedDocument extends Omit<IFeed, 'id'>, Document {
+  _id: Types.ObjectId; 
+}
 
-  }
-  
+const FeedSchema: Schema = new Schema({
+    titulo: { type: String, required: true },
+    descripcion: { type: String, required: true },
+    url: { type: String, required: true },
+    fuente: { type: String, required: true },
+    fecha: { type: Date, required: true },
+    categoria: {
+        type: String,
+        enum: ["politica", "deportes", "tecnologia", "economia", "otros"],
+        required: true
+    },
+    imagen: { type: String, required: false },
+    destacada: { type: Boolean, required: true }
+});
+
+const FeedModel = mongoose.model<IFeedDocument>('Feed', FeedSchema);
+export default FeedModel;

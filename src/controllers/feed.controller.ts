@@ -12,5 +12,11 @@ export const getNews = async (req: Request, res: Response) => {
 };
 
 export const createNews = async (req: Request, res: Response) => {
-  return null;
-}
+  console.log(req.body);
+  res.json({ message: `${req.body}` });
+  /*try {
+    await createNew(req, res);
+  } catch (err: any) {
+    res.status(500).json({ message: 'Failed to create news' });
+  }*/
+};

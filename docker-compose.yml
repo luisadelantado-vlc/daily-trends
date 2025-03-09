@@ -4,7 +4,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
       - mongo
     environment:
@@ -14,14 +14,16 @@ services:
   mongo:
     image: mongo:6
     restart: always
-    container_name: mongodb_container
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - mongo_data:/data/db
+      - mongodb_data:/data/db
+    networks:
+      - my_network
+
+networks:
+  my_network:
 
 volumes:
-  mongo_data:
+  mongodb_data:
+    driver: local

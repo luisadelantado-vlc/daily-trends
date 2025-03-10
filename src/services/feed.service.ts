@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Feed from '../models/feed.model';
 import { IFeedDocument } from '../models/feed.model';
+import logger from '../utils/logger';
 
 export const getAllNews = async (): Promise<IFeedDocument[]> => {
     try {
@@ -33,7 +34,7 @@ export const createNew = async (req: Request, res: Response): Promise<void> => {
             feed: newFeed,
         });
     } catch (err: any) {
-        console.error(err);
+        logger.error(err);
         res.status(500).json({
             message: 'Error adding the new.',
             error: err.message,

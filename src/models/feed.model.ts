@@ -6,18 +6,18 @@ export interface IFeedDocument extends Omit<IFeed, 'id'>, Document {
 }
 
 const FeedSchema: Schema = new Schema({
-    titulo: { type: String, required: true },
-    descripcion: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
     url: { type: String, required: true },
-    fuente: { type: String, required: true },
-    fecha: { type: Date, required: true },
-    categoria: {
+    source: { type: String, required: true },
+    date: { type: Date, required: true },
+    category: {
         type: String,
         enum: ["politica", "deportes", "tecnologia", "economia", "otros"],
         required: true
     },
-    imagen: { type: String, required: false },
-    destacada: { type: Boolean, required: true }
+    picture: { type: String, required: false },
+    featured: { type: Boolean, required: true }
 });
 
 const FeedModel = mongoose.model<IFeedDocument>('Feed', FeedSchema);

@@ -15,6 +15,7 @@ export const getAllNews = async (): Promise<IFeedDocument[]> => {
 export const createNew = async (req: Request, res: Response): Promise<void> => {
     try {
         const { title, description, url, source, date, category, image, featured } = req.body;
+        logger.info(`Adding a new to the feed with date: ${new Date()}`);
 
         const newFeed = new Feed({
             title,

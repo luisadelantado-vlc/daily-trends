@@ -12,7 +12,6 @@ export const getNews = async (req: Request, res: Response) => {
 };
 
 export const createNews = async (req: Request, res: Response) => {
-  res.json({ message: `${req.body}` });
   try {
     await createNew(req, res);
   } catch (err: any) {

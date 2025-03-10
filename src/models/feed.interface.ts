@@ -1,12 +1,12 @@
 export interface IFeed {
     id: string;
-    titulo: string;
-    descripcion: string;
+    title: string;
+    description: string;
     url: string;
-    fuente: string;
-    fecha: Date;
-    categoria: "politica" | "deportes" | "tecnologia" | "economia" | "otros";
-    imagen?: string;
-    destacada: boolean;
+    source: string;
+    date: Date;
+    category: "politica" | "deportes" | "tecnologia" | "economia" | "otros";
+    picture?: string;
+    featured: boolean;
   }
   

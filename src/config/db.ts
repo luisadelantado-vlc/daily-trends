@@ -3,14 +3,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/daily-trends";
-
 export const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI);
-    console.log("✅ Conectado a MongoDB");
-  } catch (error) {
-    console.error("❌ Error al conectar a MongoDB:", error);
-    process.exit(1);
+    await mongoose.connect('mongodb://mongo:27017/daily-trends', {
+      serverSelectionTimeoutMS: 30000, // 30 segundos
+    });
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+    process.exit(1); // Termina el proceso en caso de error de conexión
   }
 };

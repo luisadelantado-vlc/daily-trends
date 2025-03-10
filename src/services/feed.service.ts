@@ -25,8 +25,6 @@ export const createNew = async (req: Request, res: Response): Promise<void> => {
             image,
             featured,
         });
-
-        console.log(newFeed);
     
         await newFeed.save();
     

@@ -13,11 +13,9 @@ const FeedSchema: Schema = new Schema({
     date: { type: Date, required: true },
     category: {
         type: String,
-        enum: ["politica", "deportes", "tecnologia", "economia", "otros"],
+        enum: ['internacional', 'economia', 'deportes', 'tecnologia', 'cultura', 'ciencia', 'salud', 'politica', 'salud-y-bienestar'],
         required: true
     },
-    picture: { type: String, required: false },
-    featured: { type: Boolean, required: true }
 });
 
 const FeedModel = mongoose.model<IFeedDocument>('Feed', FeedSchema);

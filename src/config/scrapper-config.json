@@ -1,0 +1,32 @@
+{
+    "media": [
+      {
+        "title": "El País",
+        "url": "https://www.elpais.com",
+        "articleSelector": "h2",
+        "categoryPosition": 3,
+        "descriptionSelector": "p",
+        "numArticles": 5
+      },
+      {
+        "title": "El Mundo",
+        "url": "https://www.elmundo.es",
+        "articleSelector": "title",
+        "categoryPosition": 3,
+        "descriptionSelector": "p.ue-c-article__paragraph",
+        "numArticles": 5
+      }
+    ],
+    "categories": [
+      "internacional",
+      "economia",
+      "salud-y-bienestar",
+      "deportes",
+      "tecnologia",
+      "cultura",
+      "ciencia",
+      "salud",
+      "politica"
+    ]
+  }
+  

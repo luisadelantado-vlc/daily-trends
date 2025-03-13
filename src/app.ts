@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import feedRoutes from './routes/feed.routes';
 import { startScrapping } from './services/scraper.service';
-import errorHandler from './middlewares/errorHandler';
+import errorHandler from './middlewares/error.handler';
 
 const app = express();
 

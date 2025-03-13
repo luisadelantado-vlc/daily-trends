@@ -1,11 +1,9 @@
 import Feed, { IFeedDocument } from '../models/feed.model';
 import logger from '../utils/logger';
 
-
 export const getAllNews = async (): Promise<IFeedDocument[]> => {
     return await Feed.find().lean();
 };
-
 
 export const createNew = async (newsData: Partial<IFeedDocument>): Promise<IFeedDocument> => {
     logger.info(`Adding a new feed entry at: ${new Date().toISOString()}`);

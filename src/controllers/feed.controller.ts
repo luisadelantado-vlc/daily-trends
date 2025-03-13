@@ -1,56 +1,76 @@
-import { Request, Response } from 'express';
-import {getAllNews, createNew, getAllNewsByCategory, updateNewById, deleteNewById, getAllNewsByDate} from '../services/feed.service';
+import { Request, Response, NextFunction } from 'express';
+import {
+  getAllNews,
+  createNew,
+  getAllNewsByCategory,
+  updateNewById,
+  deleteNewById,
+  getAllNewsByDate
+} from '../services/feed.service';
+import logger from '../utils/logger';
 
-export const getNews = async (req: Request, res: Response) => {
+export const getNews = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const news = await getAllNews();
-    res.json(news);
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to retrieve news' });
+    res.status(200).json(news);
+  } catch (error) {
+    logger.error('Error getting news:', error);
+    next(error);
   }
 };
 
-export const createNews = async (req: Request, res: Response) => {
+export const createNews = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await createNew(req, res);
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to create news' });
+    const news = await createNew(req.body);
+    res.status(201).json(news);
+  } catch (error) {
+    logger.error('Error creating news:', error);
+    next(error);
   }
 };
 
-export const getNewsByCategory = async (req: Request, res: Response) => {
+export const getNewsByCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const news = await getAllNewsByCategory(req, res);
-    res.json(news);
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to retrieve news' });
+    const news = await getAllNewsByCategory(req.params.category);
+    res.status(200).json(news);
+  } catch (error) {
+    logger.error('Error getting news by category:', error);
+    next(error);
   }
 };
 
-export const updateNews = async (req: Request, res: Response) => {
+export const updateNews = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const updatedNews = await updateNewById(req, res);
-    res.json(updatedNews);
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to update news' });
+    const updatedNews = await updateNewById(req.params.id, req.body);
+    if (!updatedNews) {
+      return res.status(404).json({ message: 'News not found' });
+    }
+    res.status(200).json(updatedNews);
+  } catch (error) {
+    logger.error('Error updating news:', error);
+    next(error);
   }
 };
 
-export const deleteNews = async (req: Request, res: Response) => {
+export const deleteNews = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const news = await deleteNewById(req, res);
-    res.json(news);  
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to delete news' });
+    const deleted = await deleteNewById(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'News not found' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    logger.error ('Error deleting news:', error);
+    next(error);
   }
 };
 
-export const getNewsByDate = async (req: Request, res: Response) => {
+export const getNewsByDate = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const news = await getAllNewsByDate(req, res);
-    res.json(news);
-  } catch (err: any) {
-    res.status(500).json({ message: 'Failed to retrieve news' });
+    const news = await getAllNewsByDate(req.params.date);
+    res.status(200).json(news);
+  } catch (error) {
+    logger.error('Error getting news by date:', error);
+    next(error);
   }
 };
-

@@ -8,3 +8,6 @@ package-lock.json
 dist/
 build/
 .out/
+
+logs/
+*.log

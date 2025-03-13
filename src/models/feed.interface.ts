@@ -6,7 +6,5 @@ export interface IFeed {
     source: string;
     date: Date;
     category: "politica" | "deportes" | "tecnologia" | "economia" | "otros";
-    picture?: string;
-    featured: boolean;
   }
   

@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - my_network
   app:
     build: .
     ports:
@@ -10,17 +20,6 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/daily-trends
     restart: always
-    networks:
-      - my_network
-
-  mongo:
-    image: mongo:6
-    restart: always
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
     networks:
       - my_network
 

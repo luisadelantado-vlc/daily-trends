@@ -5,6 +5,5 @@ export interface IFeed {
     url: string;
     source: string;
     date: Date;
-    category: "politica" | "deportes" | "tecnologia" | "economia" | "otros";
+    category: "politica" | "deportes" | "tecnologia" | "economia" | "otros" | "internacional" | "cultura" | "ciencia" | "salud" | "salud-y-bienestar";
   }
-  
